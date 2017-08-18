@@ -61,7 +61,7 @@ extension UIViewController {
     animated: Bool,
     completion: (() -> Void)?
   ) {
-    presentReactViewController(viewControllerToPresent, animated: animated, completion: completion, presentationStyle: .fullScreen, makeTransition: nil)
+      presentReactViewController(viewControllerToPresent, animated: animated, completion: completion, presentationStyle: .fullScreen, makeTransition: nil)
   }
   public func presentReactViewController(
     _ viewControllerToPresent: ReactViewControllerProtocol,
@@ -126,7 +126,7 @@ extension UIViewController {
         rvc.transition = transition
         viewControllerToPresent.transitioningDelegate = transition
       }
-      
+
       viewControllerToPresent.modalPresentationStyle = presentationStyle
       // TODO: preferredContentSize - for popover types
 

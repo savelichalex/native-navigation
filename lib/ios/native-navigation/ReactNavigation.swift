@@ -59,7 +59,7 @@ class ReactNavigation: NSObject {
   }
 
   // MARK Transitions
-  
+
   func push(_ screenName: String, withProps props: [String: AnyObject], options: [String: AnyObject], resolve: @escaping RCTPromiseResolveBlock, reject: @escaping RCTPromiseRejectBlock) {
     print("push \(screenName)")
     DispatchQueue.main.async {
@@ -98,7 +98,7 @@ class ReactNavigation: NSObject {
       self.coordinator.startFlow(fromName: name, withProps: props, resolve: resolve, reject: reject)
     }
   }
-  
+
   func present(_ screenName: String, withProps props: [String: AnyObject], options: [String: AnyObject], resolve: @escaping RCTPromiseResolveBlock, reject: @escaping RCTPromiseRejectBlock) {
     print("present \(screenName)")
     DispatchQueue.main.async {
@@ -128,12 +128,12 @@ class ReactNavigation: NSObject {
       nav.presentReactViewController(presented, animated: animated, completion: nil, presentationStyle: self.modalPresentationStyle(from: options), makeTransition: makeTransition)
     }
   }
-  
+
   private func modalPresentationStyle(from options: [String: Any]) -> UIModalPresentationStyle {
     guard let modalPresentationStyle = options["modalPresentationStyle"] as? String else {
       return .fullScreen // this is the system default
     }
-    
+
     switch modalPresentationStyle {
     case "fullScreen":          return .fullScreen
     case "pageSheet":           return .pageSheet
@@ -147,7 +147,7 @@ class ReactNavigation: NSObject {
     default:                    return .fullScreen // This is the system default
     }
   }
-  
+
   func presentNative(_ name: String, withProps props: [String: AnyObject], options: [String: AnyObject], resolve: @escaping RCTPromiseResolveBlock, reject: @escaping RCTPromiseRejectBlock) {
     print("presentNative: \(name)")
     DispatchQueue.main.async {
@@ -164,12 +164,12 @@ class ReactNavigation: NSObject {
       vc.dismiss(animated: animated, completion: nil)
     }
   }
-  
+
   func pop(_ payload: [String: AnyObject], animated: Bool) {
     print("pop")
     // if top VC is being presented in a TabBarController, pop will pop all of the
     // Tabs, in which case we should make sure to dereference each of them.
-    
+
     // TODO(lmr):
     // what if the JS environment wants to pop a parent navigationController of the
     // top navigationController? Perhaps we could pass an optional "level" param or something.

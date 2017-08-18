@@ -39,7 +39,7 @@ open class ReactTabBarController: UITabBarController {
   fileprivate var leadingButtonVisible: Bool = true
   fileprivate var tabViews: [TabView] = []
   private var barHeight: CGFloat
-
+    
   public convenience init(moduleName: String) {
     self.init(moduleName: moduleName, props: [:])
   }
@@ -94,6 +94,11 @@ open class ReactTabBarController: UITabBarController {
       self.view.addSubview(reactView)
       self.reactView = reactView
     }
+  }
+    
+  override open func viewWillAppear(_ animated: Bool) {
+    self.navigationController?.setNavigationBarHidden(true, animated: animated);
+    super.viewWillAppear(animated);
   }
 
   func prepareViewControllerForPresenting() -> UIViewController {

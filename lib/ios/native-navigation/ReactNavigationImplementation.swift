@@ -52,8 +52,8 @@ class BlockBarButtonItem: UIBarButtonItem {
   }
 
   convenience init(barButtonSystemItem: UIBarButtonSystemItem) {
-    self.init(barButtonSystemItem: barButtonSystemItem, target: nil, action: #selector(barButtonItemPressed))
-    self.target = self
+      self.init(barButtonSystemItem: barButtonSystemItem, target: nil, action: #selector(barButtonItemPressed))
+      self.target = self
   }
 
   convenience init(
@@ -277,11 +277,19 @@ func configureBarButtonItemFromPrefix(
   _ passedItem: UIBarButtonItem?
 ) -> BlockBarButtonItem? {
 
-  // TODO:
-  // * customView
-  // * setBackButtonBackgroundImage(nil, for: .focused, barMetrics: .default)
-  // * width
+    // TODO:
+    // * customView
+    // * setBackButtonBackgroundImage(nil, for: .focused, barMetrics: .default)
+    // * width
 
+  //    ?.customView = nil
+  //    ?.setBackButtonBackgroundImage(nil, for: .focused, barMetrics: .default)
+  //    ?.style = .done
+  //    ?.tintColor = UIColor.black
+  //    ?.width = 20
+  //    ?.accessibilityLabel = ""
+  //    ?.image = nil
+  //    ?.isEnabled = false
   let title = stringForKey(lower("\(prefix)Title"), props)
   let image = imageForKey(lower("\(prefix)Image"), props)
   let systemItem = stringForKey(lower("\(prefix)SystemItem"), props)
@@ -299,39 +307,39 @@ func configureBarButtonItemFromPrefix(
       enabled != prev.isEnabled ||
       tintColor != prev.tintColor
     ) {
-      let barButton = BlockBarButtonItem(
-        title: title ?? prev.title,
-        image: image ?? prev.image,
-        barButtonSystemItem: barButtonSystemItem,
-        style: barButtonStyleFromString(style),
-        enabled: enabled,
-        tintColor: tintColor,
-        titleTextAttributes: titleTextAttributes
-      )
+        let barButton = BlockBarButtonItem(
+          title: title ?? prev.title,
+          image: image ?? prev.image,
+          barButtonSystemItem: barButtonSystemItem,
+          style: barButtonStyleFromString(style),
+          enabled: enabled,
+          tintColor: tintColor,
+          titleTextAttributes: titleTextAttributes
+        )
 
-      barButton.accessibilityLabel = accessibilityLabel
-      barButton.accessibilityIdentifier = testID
+        barButton.accessibilityLabel = accessibilityLabel
+        barButton.accessibilityIdentifier = testID
 
-      return barButton
+        return barButton
     } else {
       return nil
     }
   } else {
     if (title != nil || image != nil || barButtonSystemItem != nil) {
-      let barButton = BlockBarButtonItem(
-        title: title,
-        image: image,
-        barButtonSystemItem: barButtonSystemItem,
-        style: barButtonStyleFromString(style),
-        enabled: enabled,
-        tintColor: tintColor,
-        titleTextAttributes: titleTextAttributes
-      )
+        let barButton = BlockBarButtonItem(
+          title: title,
+          image: image,
+          barButtonSystemItem: barButtonSystemItem,
+          style: barButtonStyleFromString(style),
+          enabled: enabled,
+          tintColor: tintColor,
+          titleTextAttributes: titleTextAttributes
+        )
 
-      barButton.accessibilityLabel = accessibilityLabel
-      barButton.accessibilityIdentifier = testID
+        barButton.accessibilityLabel = accessibilityLabel
+        barButton.accessibilityIdentifier = testID
 
-      return barButton
+        return barButton
     } else {
       return nil
     }
@@ -605,6 +613,11 @@ open class DefaultReactNavigationImplementation: ReactNavigationImplementation {
       }
 
       if let translucent = boolForKey("translucent", next) {
+        if (translucent == true) {
+            navBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
+            navBar.shadowImage = UIImage()
+            navController.view.backgroundColor = UIColor.clear
+        }
         navBar.isTranslucent = translucent
       }
 
